@@ -13,7 +13,7 @@ public class GpsCheck extends Check {
 
     public GpsCheck(Context context) {
         super(context);
-        this.title.set(context.getString(R.string.gps_title));
+        setTitle(R.string.gps_title);
     }
 
     @Override
@@ -33,7 +33,6 @@ public class GpsCheck extends Check {
             }
         }
 
-        this.status.set(status);
-        this.description.set(context.getString(description));
+        setStatus(status, context.getString(description));
     }
 }

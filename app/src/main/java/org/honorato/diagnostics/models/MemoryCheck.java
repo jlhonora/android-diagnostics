@@ -12,7 +12,7 @@ public class MemoryCheck extends Check {
 
     public MemoryCheck(Context context) {
         super(context);
-        this.title.set(context.getString(R.string.memory_title));
+        setTitle(R.string.memory_title);
     }
 
     @Override
@@ -30,8 +30,7 @@ public class MemoryCheck extends Check {
             status = STATUS_OK;
             description = R.string.memory_ok;
         }
-        this.status.set(status);
-        this.description.set(String.format(context.getString(description), memory));
+        setStatus(status, String.format(context.getString(description), memory));
     }
 
 }

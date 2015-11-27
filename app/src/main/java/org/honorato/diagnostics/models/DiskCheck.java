@@ -16,7 +16,7 @@ public class DiskCheck extends Check {
 
     public DiskCheck(Context context) {
         super(context);
-        this.title.set(context.getString(R.string.disk_title));
+        setTitle(R.string.disk_title);
     }
 
     @Override
@@ -43,8 +43,7 @@ public class DiskCheck extends Check {
         String bytesAvailableStr = String.format("%.1f GB " + this.context.getString(R.string.disk_available),
                 (bytesAvailable / (1024.f * 1024.f * 1024.f)));
 
-        this.status.set(status);
-        this.description.set(String.format(this.context.getString(description),
+        setStatus(status, String.format(this.context.getString(description),
                 (int) ratio, bytesAvailableStr));
     }
 
