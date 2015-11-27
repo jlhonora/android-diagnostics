@@ -10,7 +10,7 @@
         android:background="@android:color/white"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:minHeight="72dp"
         >
 
@@ -18,7 +18,7 @@
             android:padding="16dp"
             android:layout_width="0dip"
             android:layout_weight="1"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
