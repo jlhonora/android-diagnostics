@@ -69,7 +69,7 @@ public class Check {
     public Drawable getStatusDrawable() {
         switch (status.get()) {
             case STATUS_IDLE:
-                return null;
+                return ContextCompat.getDrawable(context, R.drawable.ic_wait);
             case STATUS_OK:
                 return ContextCompat.getDrawable(context, R.drawable.ic_check);
             case STATUS_WARNING:
@@ -95,5 +95,18 @@ public class Check {
             default:
                 return ContextCompat.getColor(context, R.color.idle);
         }
+    }
+
+    public void setTitle(int titleRes) {
+        this.title.set(this.context.getString(titleRes));
+    }
+
+    public void setStatus(int status, int description) {
+        setStatus(status, this.context.getString(description));
+    }
+
+    public void setStatus(int status, String description) {
+        this.status.set(status);
+        this.description.set(description);
     }
 }
