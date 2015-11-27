@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Diagnostics</string>
+    <string name="memory_title">Available RAM Memory</string>
+    <string name="memory_low">Low memory (%s)</string>
+    <string name="memory_ok">Memory OK (%s)</string>
+
+    <string name="gps_title">GPS</string>
+    <string name="gps_ok">Enabled</string>
+    <string name="gps_disabled">Disabled</string>
+
+    <string name="disk_title">Disk space</string>
+    <string name="disk_ok">Space available: %1$d %% (%2$s)</string>
+    <string name="disk_warning">High disk usage: %1$d %% (%2$s)</string>
+    <string name="disk_full">Disk is almost full: %1$d %% (%2$s)</string>
+    <string name="disk_disabled">Disabled</string>
+</resources>

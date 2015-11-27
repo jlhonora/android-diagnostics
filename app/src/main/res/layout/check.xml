@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="org.honorato.diagnostics.models.Check"/>
+        <variable
+            name="check"
+            type="Check"/>
+    </data>
+    <LinearLayout
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="72dp"
+        >
+
+        <LinearLayout
+            android:padding="16dp"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@{check.title}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/primary_text_light"
+                android:textStyle="bold" />
+
+            <TextView
+                android:text="@{check.description}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:padding="16dp"
+            android:src="@{check.getStatusDrawable(check.status)}"
+            android:background="@{check.getStatusColor(check.status)}"
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal" />
+
+    </LinearLayout>
+</layout>
