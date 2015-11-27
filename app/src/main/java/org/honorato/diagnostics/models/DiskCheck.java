@@ -40,7 +40,8 @@ public class DiskCheck extends Check {
             description = R.string.disk_full;
         }
 
-        String bytesAvailableStr = String.format("%.1f GB", (bytesAvailable / (1024.f * 1024.f * 1024.f)));
+        String bytesAvailableStr = String.format("%.1f GB " + this.context.getString(R.string.disk_available),
+                (bytesAvailable / (1024.f * 1024.f * 1024.f)));
 
         this.status.set(status);
         this.description.set(String.format(this.context.getString(description),

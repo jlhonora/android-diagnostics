@@ -9,8 +9,9 @@
     <string name="gps_disabled">Disabled</string>
 
     <string name="disk_title">Disk space</string>
-    <string name="disk_ok">Space available: %1$d %% (%2$s)</string>
+    <string name="disk_ok">Used space: %1$d %% (%2$s)</string>
     <string name="disk_warning">High disk usage: %1$d %% (%2$s)</string>
     <string name="disk_full">Disk is almost full: %1$d %% (%2$s)</string>
     <string name="disk_disabled">Disabled</string>
+    <string name="disk_available">available</string>
 </resources>
