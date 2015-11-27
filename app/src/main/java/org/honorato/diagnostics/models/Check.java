@@ -19,6 +19,7 @@ public class Check {
     public final static int STATUS_OK      = 1;
     public final static int STATUS_WARNING = 2;
     public final static int STATUS_ERROR   = 3;
+    public final static int STATUS_INFO    = 4;
 
     public final ObservableField<String> title = new ObservableField<>();
     public final ObservableField<String> description = new ObservableField<>();
@@ -51,7 +52,7 @@ public class Check {
 
     protected void performCheck() {
         Random r = new Random();
-        int status = r.nextInt(3) + 1;
+        int status = r.nextInt(STATUS_INFO) + 1;
         Check.this.status.set(status);
         Check.this.description.set("Description status: " + Check.this.status.get());
     }
@@ -76,6 +77,8 @@ public class Check {
                 return ContextCompat.getDrawable(context, R.drawable.ic_warning);
             case STATUS_ERROR:
                 return ContextCompat.getDrawable(context, R.drawable.ic_error);
+            case STATUS_INFO:
+                return ContextCompat.getDrawable(context, R.drawable.ic_info);
         }
         return null;
     }
