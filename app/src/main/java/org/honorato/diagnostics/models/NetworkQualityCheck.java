@@ -24,7 +24,7 @@ import java.net.URLConnection;
 public class NetworkQualityCheck extends Check implements ConnectionClassManager.ConnectionClassStateChangeListener {
 
     public long DURATION_MILLIS = 3 * DateUtils.SECOND_IN_MILLIS;
-    public long BYTES = 200000;
+    public long BYTES = 150000;
     public int MAX_TRIES = 8;
     protected int nTries = 0;
 
