@@ -62,4 +62,19 @@ public class DiagnosticsActivity extends AppCompatActivity {
             c.run();
         }
     }
+
+    @Override
+    protected void onPause() {
+        cancelChecks();
+        super.onPause();
+    }
+
+    protected void cancelChecks() {
+        if (checks == null) {
+            return;
+        }
+        for (Check c : checks) {
+            c.cancel();
+        }
+    }
 }
