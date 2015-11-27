@@ -14,6 +14,8 @@ import org.honorato.diagnostics.models.Check;
 import org.honorato.diagnostics.models.DiskCheck;
 import org.honorato.diagnostics.models.GpsCheck;
 import org.honorato.diagnostics.models.MemoryCheck;
+import org.honorato.diagnostics.models.NetworkQualityCheck;
+import org.honorato.diagnostics.models.NetworkStaticCheck;
 
 public class DiagnosticsActivity extends AppCompatActivity {
 
@@ -46,6 +48,8 @@ public class DiagnosticsActivity extends AppCompatActivity {
         checks.add(new MemoryCheck(context));
         checks.add(new GpsCheck(context));
         checks.add(new DiskCheck(context));
+        checks.add(new NetworkStaticCheck(context));
+        checks.add(new NetworkQualityCheck(context));
 
         mListView.setAdapter(new ChecksAdapter(context, checks));
     }
