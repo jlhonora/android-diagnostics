@@ -13,4 +13,7 @@
         <item name="colorAccent">?attr/colorAccent</item>
     </style>
 
+    <style name="AppThemeTransparentBar" parent="Theme.AppCompat.Light">
+    </style>
+
 </resources>

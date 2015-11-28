@@ -5,6 +5,7 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 import org.honorato.diagnostics.R;
@@ -14,7 +15,7 @@ import java.util.Random;
 /**
  * Created by jlh on 11/26/15.
  */
-public class Check {
+public class Check implements Comparable {
     public final static int STATUS_IDLE    = 0;
     public final static int STATUS_OK      = 1;
     public final static int STATUS_WARNING = 2;
@@ -111,5 +112,13 @@ public class Check {
     public void setStatus(int status, String description) {
         this.status.set(status);
         this.description.set(description);
+    }
+
+    public int compareTo(@NonNull  Object o) {
+        if (!(o instanceof Check)) {
+            return 1;
+        }
+        Check other = (Check) o;
+        return this.status.get() - other.status.get();
     }
 }

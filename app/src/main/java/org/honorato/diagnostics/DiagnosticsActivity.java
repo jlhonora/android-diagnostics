@@ -4,8 +4,15 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.honorato.diagnostics.adapters.ChecksAdapter;
@@ -17,6 +24,8 @@ import org.honorato.diagnostics.models.MemoryCheck;
 import org.honorato.diagnostics.models.NetworkQualityCheck;
 import org.honorato.diagnostics.models.NetworkStaticCheck;
 
+import java.util.Collections;
+
 public class DiagnosticsActivity extends AppCompatActivity {
 
     ObservableList<Check> checks;
@@ -27,10 +36,39 @@ public class DiagnosticsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diagnostics);
+        setBar();
+
         ActivityDiagnosticsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_diagnostics);
         mListView = binding.listview;
         setChecks();
         runChecks();
+    }
+
+    protected void setBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar == null) {
+            return;
+        }
+        actionBar.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, android.R.color.transparent)));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                runChecks();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
 
     @Override
@@ -58,6 +96,7 @@ public class DiagnosticsActivity extends AppCompatActivity {
         if (checks == null) {
             return;
         }
+        Log.d("Check", "Running checks");
         for (Check c : checks) {
             c.run();
         }
@@ -76,5 +115,12 @@ public class DiagnosticsActivity extends AppCompatActivity {
         for (Check c : checks) {
             c.cancel();
         }
+    }
+
+    protected void sortChecks() {
+        if (checks == null) {
+            return;
+        }
+        Collections.sort(checks);
     }
 }

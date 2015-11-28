@@ -2,6 +2,7 @@
     <string name="app_name">Diagnostics</string>
 
     <string name="checking">Checking</string>
+    <string name="refresh">Refresh</string>
 
     <string name="memory_title">Available RAM Memory</string>
     <string name="memory_low">Low memory (%s)</string>
@@ -16,7 +17,7 @@
     <string name="disk_warning">High disk usage: %1$d %% (%2$s)</string>
     <string name="disk_full">Disk is almost full: %1$d %% (%2$s)</string>
     <string name="disk_disabled">Disabled</string>
-    <string name="disk_available">available</string>
+    <string name="disk_available">left</string>
 
     <string name="static_network_title">Network</string>
     <string name="static_network_ok">Connected</string>
