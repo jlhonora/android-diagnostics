@@ -29,4 +29,7 @@
     <string name="network_quality_poor">Your connection speed is poor</string>
     <string name="network_quality_warning">Your connection speed is moderate</string>
     <string name="network_quality_ok">Good connection</string>
+
+    <string name="battery_title">Battery</string>
+    <string name="battery_charging">Charging</string>
 </resources>

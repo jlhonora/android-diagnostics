@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +16,7 @@ import android.widget.ListView;
 
 import org.honorato.diagnostics.adapters.ChecksAdapter;
 import org.honorato.diagnostics.databinding.ActivityDiagnosticsBinding;
+import org.honorato.diagnostics.models.BatteryCheck;
 import org.honorato.diagnostics.models.Check;
 import org.honorato.diagnostics.models.DiskCheck;
 import org.honorato.diagnostics.models.GpsCheck;
@@ -56,6 +56,7 @@ public class DiagnosticsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
+                setChecks();
                 runChecks();
                 return true;
             default:
@@ -88,6 +89,7 @@ public class DiagnosticsActivity extends AppCompatActivity {
         checks.add(new DiskCheck(context));
         checks.add(new NetworkStaticCheck(context));
         checks.add(new NetworkQualityCheck(context));
+        checks.add(new BatteryCheck(context));
 
         mListView.setAdapter(new ChecksAdapter(context, checks));
     }
@@ -96,7 +98,6 @@ public class DiagnosticsActivity extends AppCompatActivity {
         if (checks == null) {
             return;
         }
-        Log.d("Check", "Running checks");
         for (Check c : checks) {
             c.run();
         }
