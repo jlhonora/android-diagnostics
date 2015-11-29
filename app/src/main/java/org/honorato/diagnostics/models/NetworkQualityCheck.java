@@ -67,6 +67,7 @@ public class NetworkQualityCheck extends Check implements ConnectionClassManager
                 samplingDone();
             }
         };
+        nTries = 0;
         handler.postDelayed(runnable, DURATION_MILLIS);
         setStatus(STATUS_IDLE, R.string.checking);
     }
