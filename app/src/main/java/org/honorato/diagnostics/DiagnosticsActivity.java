@@ -23,6 +23,7 @@ import org.honorato.diagnostics.models.GpsCheck;
 import org.honorato.diagnostics.models.MemoryCheck;
 import org.honorato.diagnostics.models.NetworkQualityCheck;
 import org.honorato.diagnostics.models.NetworkStaticCheck;
+import org.honorato.diagnostics.models.TimeCheck;
 
 import java.util.Collections;
 
@@ -84,12 +85,13 @@ public class DiagnosticsActivity extends AppCompatActivity {
     protected void setChecks() {
         Context context = this.getBaseContext();
         checks = new ObservableArrayList<>();
-        checks.add(new MemoryCheck(context));
-        checks.add(new GpsCheck(context));
+        checks.add(new BatteryCheck(context));
         checks.add(new DiskCheck(context));
+        checks.add(new MemoryCheck(context));
+        checks.add(new TimeCheck(context));
         checks.add(new NetworkStaticCheck(context));
         checks.add(new NetworkQualityCheck(context));
-        checks.add(new BatteryCheck(context));
+        checks.add(new GpsCheck(context));
 
         mListView.setAdapter(new ChecksAdapter(context, checks));
     }
