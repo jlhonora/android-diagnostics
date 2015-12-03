@@ -17,6 +17,8 @@ import java.util.Locale;
  */
 public class TimeCheck extends Check {
 
+    TimeCheckTask mTask;
+
     public TimeCheck(Context context) {
         super(context);
         setTitle(R.string.time_title);
@@ -25,7 +27,8 @@ public class TimeCheck extends Check {
 
     @Override
     protected void performCheck() {
-        new CheckTimeTask().execute("pool.ntp.org");
+        mTask = new TimeCheckTask();
+        mTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this);
     }
 
     protected static long getNtpMillis(String url) {
@@ -43,7 +46,7 @@ public class TimeCheck extends Check {
         return result;
     }
 
-    protected void updateNtpTime(long millis) {
+    public void updateNtpTime(long millis) {
         Calendar localCal = Calendar.getInstance();
         Calendar ntpCal = Calendar.getInstance();
         ntpCal.setTimeInMillis(millis);
@@ -61,7 +64,7 @@ public class TimeCheck extends Check {
             diffFraction = (float) diff / (float) DateUtils.HOUR_IN_MILLIS;
             unitStringRes = R.string.hours;
             status = STATUS_ERROR;
-        } else if (Math.abs(diff) > 5 * DateUtils.MINUTE_IN_MILLIS) {
+        } else if (Math.abs(diff) > 2 * DateUtils.MINUTE_IN_MILLIS) {
             diffFraction = (float) diff / (float) DateUtils.MINUTE_IN_MILLIS;
             unitStringRes = R.string.minutes;
             status = STATUS_WARNING;
@@ -71,16 +74,30 @@ public class TimeCheck extends Check {
                 this.context.getString(unitStringRes));
     }
 
-    public class CheckTimeTask extends AsyncTask<String, Void, Long> {
+
+    @Override
+    public void cancel() {
+        super.cancel();
+        super.cancel(mTask);
+    }
+
+    public class TimeCheckTask extends AsyncTask<TimeCheck, Void, Long> {
+
+        protected TimeCheck mCheck;
 
         @Override
-        protected Long doInBackground(String... urls) {
-            return getNtpMillis(urls[0]);
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected Long doInBackground(TimeCheck... checks) {
+            this.mCheck = checks[0];
+            return getNtpMillis("pool.ntp.org");
         }
 
         @Override
         protected void onPostExecute(Long result) {
-            TimeCheck.this.updateNtpTime(result);
+            this.mCheck.updateNtpTime(result);
         }
     }
 }
