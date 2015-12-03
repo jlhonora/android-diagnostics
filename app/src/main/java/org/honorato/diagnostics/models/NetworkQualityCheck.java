@@ -108,9 +108,7 @@ public class NetworkQualityCheck extends Check implements ConnectionClassManager
     @Override
     public void cancel() {
         super.cancel();
-        if (mTask != null && !mTask.isCancelled()) {
-            mTask.cancel(true);
-        }
+        super.cancel(mTask);
         ConnectionClassManager.getInstance().remove(this);
     }
 

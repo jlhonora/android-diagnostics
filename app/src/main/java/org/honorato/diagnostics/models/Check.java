@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -61,6 +62,12 @@ public class Check implements Comparable {
     public void cancel() {
         if (handler != null && runnable != null) {
             handler.removeCallbacks(runnable);
+        }
+    }
+
+    public void cancel(AsyncTask<?, ?, ?> task) {
+        if (task != null && !task.isCancelled()) {
+            task.cancel(true);
         }
     }
 
