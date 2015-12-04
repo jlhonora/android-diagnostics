@@ -19,9 +19,8 @@ Uses Android's data binding framework, which is still in beta, so expect changes
 Contributions are welcome! Here are a few ideas:
 
 1. Setup a result (to be used along with `startActivityForResult`)
-2. Sort checks through their status
-3. `NetworkQualityCheck` needs to be more stable, and provide uplink/downlink checks
-4. Sensor checks are welcome
-5. Create an icon
-6. Coordinator layout for ActionBar + ListView
-7. Add kbps measurement to `NetworkQualityCheck`
+2. `NetworkQualityCheck` needs to be more stable, and provide uplink/downlink checks
+3. Sensor checks are welcome
+4. Create an icon
+5. Coordinator layout for ActionBar + ListView
+6. Add kbps measurement to `NetworkQualityCheck`
