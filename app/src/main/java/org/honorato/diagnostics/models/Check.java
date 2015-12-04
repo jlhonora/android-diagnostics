@@ -17,16 +17,15 @@ import java.util.Random;
  * Created by jlh on 11/26/15.
  */
 public class Check implements Comparable {
-    public final static int STATUS_IDLE    = 0;
-    public final static int STATUS_OK      = 1;
+    public final static int STATUS_OK      = 0;
+    public final static int STATUS_IDLE    = 1;
     public final static int STATUS_WARNING = 2;
     public final static int STATUS_ERROR   = 3;
     public final static int STATUS_INFO    = 4;
 
     public final ObservableField<String> title = new ObservableField<>();
     public final ObservableField<String> description = new ObservableField<>();
-    public final ObservableInt status = new ObservableInt();
-    public final ObservableInt code = new ObservableInt();
+    public final ObservableInt status = new ObservableInt(STATUS_IDLE);
 
     Context context;
     Handler handler;
@@ -126,6 +125,6 @@ public class Check implements Comparable {
             return 1;
         }
         Check other = (Check) o;
-        return this.status.get() - other.status.get();
+        return other.status.get() - this.status.get();
     }
 }
