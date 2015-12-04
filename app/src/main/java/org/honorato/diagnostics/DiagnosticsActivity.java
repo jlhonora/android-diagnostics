@@ -2,6 +2,7 @@ package org.honorato.diagnostics;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.databinding.Observable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.graphics.drawable.ColorDrawable;
@@ -32,6 +33,8 @@ public class DiagnosticsActivity extends AppCompatActivity {
     ObservableList<Check> checks;
 
     ListView mListView;
+
+    ChecksAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,8 @@ public class DiagnosticsActivity extends AppCompatActivity {
 
         if (checks == null) {
             setChecks();
+        } else {
+            registerChecksCallbacks();
         }
     }
 
@@ -93,7 +98,10 @@ public class DiagnosticsActivity extends AppCompatActivity {
         checks.add(new NetworkQualityCheck(context));
         checks.add(new GpsCheck(context));
 
-        mListView.setAdapter(new ChecksAdapter(context, checks));
+        mAdapter = new ChecksAdapter(context, checks);
+        mListView.setAdapter(mAdapter);
+
+        registerChecksCallbacks();
     }
 
     protected void runChecks() {
@@ -118,6 +126,33 @@ public class DiagnosticsActivity extends AppCompatActivity {
         for (Check c : checks) {
             c.cancel();
         }
+
+        unregisterChecksCallbacks();
+    }
+
+    Observable.OnPropertyChangedCallback mCallback;
+
+    protected void registerChecksCallbacks() {
+        if (mCallback == null) {
+            mCallback = new Observable.OnPropertyChangedCallback() {
+                @Override
+                public void onPropertyChanged(Observable sender, int propertyId) {
+                    sortChecks();
+                }
+            };
+        }
+        for (Check c : this.checks) {
+            c.status.addOnPropertyChangedCallback(mCallback);
+        }
+    }
+
+    protected void unregisterChecksCallbacks() {
+        if (mCallback == null) {
+            return;
+        }
+        for (Check c : this.checks) {
+            c.status.removeOnPropertyChangedCallback(mCallback);
+        }
     }
 
     protected void sortChecks() {
@@ -125,5 +160,7 @@ public class DiagnosticsActivity extends AppCompatActivity {
             return;
         }
         Collections.sort(checks);
+
+        mAdapter.notifyDataSetChanged();
     }
 }
