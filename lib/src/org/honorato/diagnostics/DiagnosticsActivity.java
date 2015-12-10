@@ -58,7 +58,7 @@ public class DiagnosticsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        /*switch (item.getItemId()) {
             case R.id.action_refresh:
                 setChecks();
                 runChecks();
@@ -66,7 +66,8 @@ public class DiagnosticsActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
 
-        }
+        }*/
+        return true;
     }
 
     @Override

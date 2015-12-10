@@ -1,4 +1,4 @@
-package org.honorato.diagnostics;
+package org.honorato.diagnostics.example;
 
 import org.junit.Test;
 
