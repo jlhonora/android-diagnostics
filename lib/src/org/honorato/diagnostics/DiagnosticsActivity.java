@@ -3,8 +3,6 @@ package org.honorato.diagnostics;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.Observable;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -26,11 +24,13 @@ import org.honorato.diagnostics.models.NetworkQualityCheck;
 import org.honorato.diagnostics.models.NetworkStaticCheck;
 import org.honorato.diagnostics.models.TimeCheck;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class DiagnosticsActivity extends AppCompatActivity {
 
-    ObservableList<Check> checks;
+    List<Check> checks;
 
     ListView mListView;
 
@@ -90,7 +90,7 @@ public class DiagnosticsActivity extends AppCompatActivity {
 
     protected void setChecks() {
         Context context = this.getBaseContext();
-        checks = new ObservableArrayList<>();
+        checks = new ArrayList<>();
         checks.add(new BatteryCheck(context));
         checks.add(new DiskCheck(context));
         checks.add(new MemoryCheck(context));

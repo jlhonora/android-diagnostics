@@ -2,7 +2,6 @@ package org.honorato.diagnostics.adapters;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,14 @@ import org.honorato.diagnostics.R;
 import org.honorato.diagnostics.databinding.CheckBinding;
 import org.honorato.diagnostics.models.Check;
 
+import java.util.List;
+
 /**
  * Created by jlh on 11/26/15.
  */
 public class ChecksAdapter extends ArrayAdapter<Check> {
 
-    public ChecksAdapter(Context context, ObservableList<Check> checks) {
+    public ChecksAdapter(Context context, List<Check> checks) {
         super(context, R.layout.check, checks);
     }
 
