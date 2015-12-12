@@ -58,16 +58,13 @@ public class DiagnosticsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*switch (item.getItemId()) {
-            case R.id.action_refresh:
-                setChecks();
-                runChecks();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-
-        }*/
-        return true;
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_refresh) {
+            setChecks();
+            runChecks();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
