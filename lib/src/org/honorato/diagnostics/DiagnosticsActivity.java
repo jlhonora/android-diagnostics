@@ -3,8 +3,12 @@ package org.honorato.diagnostics;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.Observable;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,13 +28,11 @@ import org.honorato.diagnostics.models.NetworkQualityCheck;
 import org.honorato.diagnostics.models.NetworkStaticCheck;
 import org.honorato.diagnostics.models.TimeCheck;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class DiagnosticsActivity extends AppCompatActivity {
 
-    List<Check> checks;
+    protected ObservableList<Check> checks;
 
     ListView mListView;
 
@@ -87,7 +89,7 @@ public class DiagnosticsActivity extends AppCompatActivity {
 
     protected void setChecks() {
         Context context = this.getBaseContext();
-        checks = new ArrayList<>();
+        checks = new ObservableArrayList<Check>();
         checks.add(new BatteryCheck(context));
         checks.add(new DiskCheck(context));
         checks.add(new MemoryCheck(context));
@@ -129,6 +131,7 @@ public class DiagnosticsActivity extends AppCompatActivity {
     }
 
     Observable.OnPropertyChangedCallback mCallback;
+    ObservableList.OnListChangedCallback mListCallback;
 
     protected void registerChecksCallbacks() {
         if (mCallback == null) {
@@ -140,17 +143,70 @@ public class DiagnosticsActivity extends AppCompatActivity {
             };
         }
         for (Check c : this.checks) {
-            c.status.addOnPropertyChangedCallback(mCallback);
+            registerCheckCallback(c);
         }
+
+        if (mListCallback == null) {
+            mListCallback = new ObservableList.OnListChangedCallback() {
+
+
+                @Override
+                public void onChanged(ObservableList sender) {
+
+                }
+
+                @Override
+                public void onItemRangeChanged(ObservableList sender, int positionStart, int itemCount) {
+
+                }
+
+                @Override
+                public void onItemRangeInserted(ObservableList sender, int positionStart, int itemCount) {
+                    for (int i = positionStart; i < (positionStart + itemCount); i++) {
+                        registerCheckCallback((Check) sender.get(i));
+                    }
+                }
+
+                @Override
+                public void onItemRangeMoved(ObservableList sender, int fromPosition, int toPosition, int itemCount) {
+
+                }
+
+                @Override
+                public void onItemRangeRemoved(ObservableList sender, int positionStart, int itemCount) {
+                    for (int i = positionStart; i < (positionStart + itemCount); i++) {
+                        unregisterCheckCallback((Check) sender.get(i));
+                    }
+                }
+            };
+
+        }
+        this.checks.addOnListChangedCallback(mListCallback);
     }
 
-    protected void unregisterChecksCallbacks() {
+    protected void registerCheckCallback(@NonNull Check c) {
         if (mCallback == null) {
             return;
         }
-        for (Check c : this.checks) {
-            c.status.removeOnPropertyChangedCallback(mCallback);
+        c.status.addOnPropertyChangedCallback(mCallback);
+    }
+
+    protected void unregisterChecksCallbacks() {
+        if (mCallback != null) {
+            for (Check c : this.checks) {
+                unregisterCheckCallback(c);
+            }
         }
+        if (mListCallback != null) {
+            this.checks.removeOnListChangedCallback(mListCallback);
+        }
+    }
+
+    protected void unregisterCheckCallback(Check c) {
+        if (mCallback == null) {
+            return;
+        }
+        c.status.removeOnPropertyChangedCallback(mCallback);
     }
 
     protected void sortChecks() {
