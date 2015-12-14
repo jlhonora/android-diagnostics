@@ -14,6 +14,47 @@ Uses Android's data binding framework, which is still in beta, so expect changes
 - Battery status
 - NTP time sync
 
+## Adding custom checks
+
+To add custom checks you'll need to:
+
+- Create a custom check and override the `performCheck` method:
+
+```
+public class CustomCheck extends Check {
+
+    public CustomCheck(Context context) {
+        super(context);
+        setTitle(R.string.custom_title);
+    }
+
+    @Override
+    public void performCheck() {
+        setStatus(STATUS_OK, "Everything's OK!");
+    }
+}
+```
+
+- Create an activity that extends `DiagnosticsActivity` and override `setChecks`:
+
+```
+public class MainActivity extends DiagnosticsActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void setChecks() {
+        super.setChecks();
+
+        // Add your checks like this:
+        // this.checks.add(new Check(this.getBaseContext()));
+    }
+}
+```
+
 ## Contributing
 
 Contributions are welcome! Here are a few ideas:
