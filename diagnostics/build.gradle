@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def mVersionCode = 1
-def mVersionName = "0.1"
+def mVersionCode = 2
+def mVersionName = "0.1.0"
 group = "org.honorato.diagnostics"
 version = mVersionName
 
@@ -48,7 +48,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "android-diagnostics"
+        name = "diagnostics"
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         issueTrackerUrl = siteUrl + '/issues'

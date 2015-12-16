@@ -4,6 +4,41 @@ An extensible diagnostics activity for Android.
 
 Uses Android's data binding framework, which is still in beta, so expect changes.
 
+## Usage
+
+Add this library to your app's `build.gradle` file:
+
+```
+repositories {
+    maven {
+        url  "http://dl.bintray.com/jlhonora/maven"
+    }
+}
+
+dependencies {
+    compile 'org.honorato.diagnostics:diagnostics:0.1.0'
+}
+```
+
+Create an activity that extends `DiagnosticsActivity` (remember to declare it on your manifest as well):
+
+```
+public class MyDiagnosticsActivity extends DiagnosticsActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+}
+```
+
+Call it:
+
+```
+Intent intent = new Intent(this, MyDiagnosticsActivity.class);
+startActivity(intent);
+```
+
 ## Implemented checks
 
 - RAM Memory
@@ -59,6 +94,7 @@ public class MainActivity extends DiagnosticsActivity {
 
 Contributions are welcome! Here are a few ideas:
 
+0. Fix permissions for Android 6.0 (Marshmallow)
 1. Setup a result (to be used along with `startActivityForResult`)
 2. `NetworkQualityCheck` needs to be more stable, and provide uplink/downlink checks
 3. Sensor checks are welcome
