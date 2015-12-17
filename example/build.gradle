@@ -22,12 +22,6 @@ android {
     }
 }
 
-repositories {
-    maven {
-        url  "http://dl.bintray.com/jlhonora/maven"
-    }
-}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'

@@ -9,12 +9,6 @@ Uses Android's data binding framework, which is still in beta, so expect changes
 Add this library to your app's `build.gradle` file:
 
 ```
-repositories {
-    maven {
-        url  "http://dl.bintray.com/jlhonora/maven"
-    }
-}
-
 dependencies {
     compile 'org.honorato.diagnostics:diagnostics:0.1.0'
 }
