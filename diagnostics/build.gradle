@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def mVersionCode = 3
-def mVersionName = "0.1.1"
+def mVersionCode = 4
+def mVersionName = "0.1.2"
 group = "org.honorato.diagnostics"
 version = mVersionName
 
@@ -35,6 +35,10 @@ android {
 
     dataBinding {
         enabled true
+    }
+
+    lintOptions {
+        disable 'GoogleAppIndexingWarning'
     }
 }
 

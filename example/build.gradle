@@ -26,8 +26,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'org.honorato.diagnostics:diagnostics:0.1.1'
+    // compile 'org.honorato.diagnostics:diagnostics:0.1.2'
 
     // Uncomment this if you want the latest version of the lib
-    // compile project(':diagnostics')
+    compile project(':diagnostics')
 }
