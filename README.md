@@ -10,7 +10,7 @@ Add this library to your app's `build.gradle` file:
 
 ```
 dependencies {
-    compile 'org.honorato.diagnostics:diagnostics:0.1.1'
+    compile 'org.honorato.diagnostics:diagnostics:0.1.2'
 }
 ```
 
@@ -67,19 +67,14 @@ public class CustomCheck extends Check {
 - Create an activity that extends `DiagnosticsActivity` and override `setChecks`:
 
 ```
-public class MainActivity extends DiagnosticsActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+public class MyDiagnosticsActivity extends DiagnosticsActivity {
 
     @Override
     protected void setChecks() {
         super.setChecks();
 
         // Add your checks like this:
-        // this.checks.add(new Check(this.getBaseContext()));
+        // this.checks.add(new CustomCheck(this.getBaseContext()));
     }
 }
 ```
