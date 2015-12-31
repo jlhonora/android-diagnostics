@@ -19,6 +19,6 @@
             android:layout_height="wrap_content"
             android:dividerHeight="0dp"
             android:elevation="8dp"
-            />
+            tools:ignore="UnusedAttribute" />
     </LinearLayout>
 </layout>
