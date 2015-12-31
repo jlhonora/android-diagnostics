@@ -2,6 +2,7 @@ package org.honorato.diagnostics.models;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.SystemClock;
 import android.text.format.DateUtils;
 
@@ -28,7 +29,11 @@ public class TimeCheck extends Check {
     @Override
     protected void performCheck() {
         mTask = new TimeCheckTask();
-        mTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            mTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this);
+        } else {
+            mTask.execute(this);
+        }
     }
 
     protected static long getNtpMillis(String url) {
