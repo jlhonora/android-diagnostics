@@ -4,10 +4,10 @@
     <string name="battery_title">Batería</string>
     <string name="checking">Chequeando</string>
     <string name="disk_available">disponibles</string>
-    <string name="disk_full">Disco casi lleno: %1$d %% (%2$s)</string>
-    <string name="disk_ok">Espacio utilizado: %1$d %% (%2$s)</string>
+    <string name="disk_full">Disco casi lleno: %1$d%% (%2$s)</string>
+    <string name="disk_ok">Espacio utilizado: %1$d%% (%2$s)</string>
     <string name="disk_title">Espacio de disco</string>
-    <string name="disk_warning">Alto uso de disco: %1$d %% (%2$s)</string>
+    <string name="disk_warning">Alto uso de disco: %1$d%% (%2$s)</string>
     <string name="generic_check_error">Error al realizar chequeo</string>
     <string name="gps_disabled">Deshabilitado</string>
     <string name="gps_ok">Habilitado</string>
