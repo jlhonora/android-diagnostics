@@ -10,7 +10,7 @@ Add this library to your app's `build.gradle` file:
 
 ```
 dependencies {
-    compile 'org.honorato.diagnostics:diagnostics:0.1.2'
+    compile 'org.honorato.diagnostics:diagnostics:0.1.3'
 }
 ```
 
