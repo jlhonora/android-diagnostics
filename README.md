@@ -20,7 +20,7 @@ android {
 
 
 dependencies {
-    compile 'org.honorato.diagnostics:diagnostics:0.1.3'
+    compile 'org.honorato.diagnostics:diagnostics:0.1.5'
 }
 ```
 
