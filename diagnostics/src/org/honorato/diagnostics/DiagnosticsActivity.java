@@ -60,9 +60,14 @@ public class DiagnosticsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
+        // Note: resource id switch statements cannot be used
+        // in Android library modules
         if (itemId == R.id.action_refresh) {
             setChecks();
             runChecks();
+            return true;
+        } else if (itemId == android.R.id.home) {
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
