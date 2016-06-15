@@ -38,12 +38,7 @@ public class NetworkQualityCheck extends Check implements ConnectionClassManager
 
     @Override
     protected void performCheck() {
-        startDownload();
         startCheck();
-    }
-
-    protected void startDownload() {
-
     }
 
     protected void startCheck() {
