@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.support.v4.os.AsyncTaskCompat;
 import android.text.format.DateUtils;
 
 import com.facebook.network.connectionclass.ConnectionClassManager;
@@ -24,7 +25,7 @@ import java.net.URLConnection;
 public class NetworkQualityCheck extends Check implements ConnectionClassManager.ConnectionClassStateChangeListener {
 
     public long DURATION_MILLIS = 3 * DateUtils.SECOND_IN_MILLIS;
-    public long BYTES = 150000;
+    public long BYTES = 100000;
     public int MAX_TRIES = 8;
     protected int nTries = 0;
 
@@ -57,7 +58,7 @@ public class NetworkQualityCheck extends Check implements ConnectionClassManager
 
         if (mTask == null || mTask.getStatus() == AsyncTask.Status.FINISHED || mTask.isCancelled()) {
             mTask = new DownloadBytes();
-            mTask.execute("https://httpbin.org/drip?numbytes=" + BYTES);
+            AsyncTaskCompat.executeParallel(mTask, "https://httpbin.org/drip?numbytes=" + BYTES);
         }
 
         runnable = new Runnable() {
