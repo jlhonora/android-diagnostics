@@ -27,14 +27,29 @@ public class Check implements Comparable {
     public final ObservableField<String> description = new ObservableField<>();
     public final ObservableInt status = new ObservableInt(STATUS_IDLE);
 
-    Context context;
-    Handler handler;
-    Runnable runnable;
+    /**
+     * A context to be used within this check
+     */
+    protected Context context;
+
+    /**
+     * The main handler for this check's runnable
+     */
+    protected Handler handler;
+
+    /**
+     * The runnable to be used by @ref{handler} to actually
+     * run this check
+     */
+    protected Runnable runnable;
 
     public Check(Context context) {
         this.context = context;
     }
 
+    /**
+     * Called when this check is ran externally
+     */
     public void run() {
         if (runnable == null) {
             runnable = new Runnable() {
@@ -51,6 +66,9 @@ public class Check implements Comparable {
         handler.post(runnable);
     }
 
+    /**
+     * Actually perform the check duty
+     */
     protected void performCheck() {
         Random r = new Random();
         int status = r.nextInt(STATUS_INFO) + 1;
