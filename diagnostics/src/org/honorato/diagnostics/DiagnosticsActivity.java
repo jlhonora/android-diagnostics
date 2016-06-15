@@ -6,7 +6,6 @@ import android.databinding.Observable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -45,7 +44,7 @@ public class DiagnosticsActivity extends AppCompatActivity {
         setBar();
 
         ActivityDiagnosticsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_diagnostics);
-        mListView = binding.listview;
+        mListView = binding.diagnosticsListview;
         setChecks();
         runChecks();
     }

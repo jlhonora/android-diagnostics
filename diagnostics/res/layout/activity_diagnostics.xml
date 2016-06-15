@@ -14,7 +14,7 @@
         tools:context="org.honorato.diagnostics.DiagnosticsActivity">
 
         <ListView
-            android:id="@+id/listview"
+            android:id="@+id/diagnostics_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:dividerHeight="0dp"
