@@ -9,6 +9,16 @@ Uses Android's data binding framework, which is still in beta, so expect changes
 Add this library to your app's `build.gradle` file:
 
 ```
+android {
+
+    // This library uses data binding, so you'll need
+    // to add the following lines:
+    dataBinding {
+        enabled = true
+    }
+}
+
+
 dependencies {
     compile 'org.honorato.diagnostics:diagnostics:0.1.3'
 }
