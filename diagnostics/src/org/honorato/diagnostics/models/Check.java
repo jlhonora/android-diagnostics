@@ -11,7 +11,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import org.honorato.diagnostics.R;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.Collection;
 import java.util.Random;
 
 /**
@@ -91,11 +95,11 @@ public class Check implements Comparable {
 
     @Nullable
     public Drawable getStatusDrawable() {
-        return getStatusDrawable(status.get());
+        return getStatusDrawable(status.get(), context);
     }
 
     @Nullable
-    public Drawable getStatusDrawable(int status) {
+    public static Drawable getStatusDrawable(int status, Context context) {
         switch (status) {
             case STATUS_IDLE:
                 return ContextCompat.getDrawable(context, R.drawable.ic_wait);
@@ -112,10 +116,10 @@ public class Check implements Comparable {
     }
 
     public int getStatusColor() {
-        return getStatusColor(status.get());
+        return getStatusColor(status.get(), context);
     }
 
-    public int getStatusColor(int status) {
+    public static int getStatusColor(int status, Context context) {
         switch (status) {
             case STATUS_OK:
                 return ContextCompat.getColor(context, R.color.success);
@@ -134,7 +138,7 @@ public class Check implements Comparable {
     }
 
     @NonNull
-    public String getStatusString(int status) {
+    public static String getStatusString(int status) {
         switch (status) {
             case STATUS_OK:
                 return "ok";
@@ -143,7 +147,7 @@ public class Check implements Comparable {
             case STATUS_ERROR:
                 return "error";
             case STATUS_INFO:
-                return "error";
+                return "info";
             case STATUS_IDLE:
                 return "idle";
             default:
@@ -170,5 +174,53 @@ public class Check implements Comparable {
         }
         Check other = (Check) o;
         return other.status.get() - this.status.get();
+    }
+
+    /**
+     * Transforms this check into a JSON object with the following
+     * fields:
+     *
+     * status: "ok", "warning", "error", "info", "idle" or "unknown"
+     * title: This check's title
+     * description: This check's description
+     * class: This check's class string
+     *
+     * @return A JSON object with the representation of this check
+     * @throws JSONException
+     */
+    public JSONObject toJson() throws JSONException {
+        JSONObject result = new JSONObject();
+        result.put("status", getStatusString());
+        result.put("title", title.get());
+        result.put("description", description.get());
+        result.put("class", this.getClass().toString());
+        return result;
+    }
+
+    /**
+     * A report for a collection of checks
+     * @param checks the checks to be included in the report
+     * @return JSON object with the following fields:
+     *
+     * checks: JSON array of each check's JSON
+     * status: General status for these checks, usually the first one
+     * that is not OK.
+     * @throws JSONException
+     */
+    public static JSONObject getJSONReport(Collection<Check> checks) throws JSONException {
+        JSONObject result = new JSONObject();
+        JSONArray checksJson = new JSONArray();
+        int generalStatus = STATUS_OK;
+        for (Check check : checks) {
+            int status = check.status.get();
+            if (generalStatus == STATUS_OK && status != STATUS_IDLE) {
+                generalStatus = check.status.get();
+            }
+            checksJson.put(check.toJson());
+        }
+        result.put("checks", checksJson);
+        result.put("status", getStatusString(generalStatus));
+
+        return result;
     }
 }
