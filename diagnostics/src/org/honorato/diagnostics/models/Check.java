@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import org.honorato.diagnostics.R;
@@ -88,12 +89,14 @@ public class Check implements Comparable {
         }
     }
 
-    public Drawable getStatusDrawable(int status) {
-        return getStatusDrawable();
+    @Nullable
+    public Drawable getStatusDrawable() {
+        return getStatusDrawable(status.get());
     }
 
-    public Drawable getStatusDrawable() {
-        switch (status.get()) {
+    @Nullable
+    public Drawable getStatusDrawable(int status) {
+        switch (status) {
             case STATUS_IDLE:
                 return ContextCompat.getDrawable(context, R.drawable.ic_wait);
             case STATUS_OK:
@@ -108,12 +111,12 @@ public class Check implements Comparable {
         return null;
     }
 
-    public int getStatusColor(int status) {
-        return getStatusColor();
+    public int getStatusColor() {
+        return getStatusColor(status.get());
     }
 
-    public int getStatusColor() {
-        switch (status.get()) {
+    public int getStatusColor(int status) {
+        switch (status) {
             case STATUS_OK:
                 return ContextCompat.getColor(context, R.color.success);
             case STATUS_WARNING:
@@ -122,6 +125,29 @@ public class Check implements Comparable {
                 return ContextCompat.getColor(context, R.color.error);
             default:
                 return ContextCompat.getColor(context, R.color.idle);
+        }
+    }
+
+    @NonNull
+    public String getStatusString() {
+        return getStatusString(status.get());
+    }
+
+    @NonNull
+    public String getStatusString(int status) {
+        switch (status) {
+            case STATUS_OK:
+                return "ok";
+            case STATUS_WARNING:
+                return "warning";
+            case STATUS_ERROR:
+                return "error";
+            case STATUS_INFO:
+                return "error";
+            case STATUS_IDLE:
+                return "idle";
+            default:
+                return "unknown";
         }
     }
 

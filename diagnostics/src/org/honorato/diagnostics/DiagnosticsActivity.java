@@ -93,7 +93,7 @@ public class DiagnosticsActivity extends AppCompatActivity {
 
     protected void setChecks() {
         Context context = this.getBaseContext();
-        checks = new ObservableArrayList<Check>();
+        checks = new ObservableArrayList<>();
         checks.add(new BatteryCheck(context));
         checks.add(new DiskCheck(context));
         checks.add(new MemoryCheck(context));
