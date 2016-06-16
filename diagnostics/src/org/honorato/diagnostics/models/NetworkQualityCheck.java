@@ -79,14 +79,13 @@ public class NetworkQualityCheck extends Check implements ConnectionClassManager
     }
 
     protected void updateConnectionQuality(ConnectionQuality cq) {
-        int status = STATUS_ERROR;
+        int status = STATUS_WARNING;
         int description = R.string.network_quality_unknown;
         switch (cq) {
             case POOR:
                 description = R.string.network_quality_poor;
                 break;
             case MODERATE:
-                status = STATUS_WARNING;
                 description = R.string.network_quality_warning;
                 break;
             case GOOD:
